@@ -1,0 +1,173 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Willi's KI-Tool Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 2rem;
+    }
+    h1 {
+      text-align: center;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 0.5rem;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+    .tool-card {
+      background: #fff;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      margin-bottom: 1rem;
+    }
+    .tool-category {
+      font-weight: bold;
+      color: #333;
+    }
+    .tool-link {
+      color: #007bff;
+      text-decoration: none;
+    }
+    .tool-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>Willi's KI-Tool Dashboard</h1>
+  <input type="text" id="searchInput" placeholder="🔍 Suche nach Tool oder Kategorie...">
+
+  <div id="toolContainer"></div>
+
+  <script>
+    const tools = [
+      {
+        name: "Claude AI",
+        url: "https://claude.ai",
+        category: "Ideenfindung",
+        description: "Stark für Brainstorming und Strukturierung."
+      },
+      {
+        name: "ChatGPT",
+        url: "https://chat.openai.com",
+        category: "Ideenfindung",
+        description: "Allrounder für Text, Code und Kreatives."
+      },
+      {
+        name: "Perplexity",
+        url: "https://www.perplexity.ai",
+        category: "Ideenfindung",
+        description: "KI-Suchmaschine mit präzisen, aktuellen Antworten."
+      },
+      {
+        name: "Google Gemini",
+        url: "https://gemini.google.com",
+        category: "Ideenfindung",
+        description: "KI-Assistent von Google mit starkem Kontextverständnis."
+      },
+      {
+        name: "Grok",
+        url: "https://x.ai",
+        category: "Ideenfindung",
+        description: "KI von X/Twitter – mit Humor und Kontext."
+      },
+      {
+        name: "Bing Create",
+        url: "https://www.bing.com/images/create",
+        category: "Bildgenerierung",
+        description: "Einfacher Einstieg mit DALL·E."
+      },
+      {
+        name: "Midjourney",
+        url: "https://www.midjourney.com",
+        category: "Bildgenerierung",
+        description: "Top-Qualität für künstlerische Bilder."
+      },
+      {
+        name: "Stable Diffusion Web",
+        url: "https://stablediffusionweb.com/de",
+        category: "Bildgenerierung",
+        description: "Kostenlose Bildgenerierung mit Stable Diffusion."
+      },
+      {
+        name: "RunwayML",
+        url: "https://runwayml.com",
+        category: "Video & Animation",
+        description: "Text-zu-Video und kreative Videobearbeitung mit KI."
+      },
+      {
+        name: "Sora (OpenAI)",
+        url: "https://openai.com/sora",
+        category: "Video & Animation",
+        description: "Zukunftsweisende Text-zu-Video-KI von OpenAI (Beta)."
+      },
+      {
+        name: "Audiopen",
+        url: "https://audiopen.ai",
+        category: "Sprache zu Text",
+        description: "Macht Gedanken aus Sprache zu strukturierten Texten."
+      },
+      {
+        name: "Whisk",
+        url: "https://whisk.com",
+        category: "Ernährung & Rezepte",
+        description: "Ernährungs- und Rezeptplaner mit KI-Unterstützung."
+      },
+      {
+        name: "Canva",
+        url: "https://www.canva.com",
+        category: "Design",
+        description: "Intuitives Design-Tool mit vielen Vorlagen."
+      },
+      {
+        name: "Microsoft Designer",
+        url: "https://designer.microsoft.com",
+        category: "Design",
+        description: "AI-gestütztes Design-Tool von Microsoft."
+      },
+      {
+        name: "Gamma",
+        url: "https://gamma.app",
+        category: "Präsentationen",
+        description: "Moderne Präsentationen mit KI – einfach & visuell."
+      }
+    ];
+
+    const toolContainer = document.getElementById('toolContainer');
+    const searchInput = document.getElementById('searchInput');
+
+    function renderTools(filter = "") {
+      toolContainer.innerHTML = "";
+      tools.filter(tool => {
+        return (
+          tool.name.toLowerCase().includes(filter.toLowerCase()) ||
+          tool.category.toLowerCase().includes(filter.toLowerCase())
+        );
+      }).forEach(tool => {
+        const card = document.createElement('div');
+        card.className = 'tool-card';
+        card.innerHTML = `
+          <div class="tool-category">${tool.category}</div>
+          <h2><a class="tool-link" href="${tool.url}" target="_blank">${tool.name}</a></h2>
+          <p>${tool.description}</p>
+        `;
+        toolContainer.appendChild(card);
+      });
+    }
+
+    searchInput.addEventListener('input', (e) => {
+      renderTools(e.target.value);
+    });
+
+    renderTools();
+  </script>
+</body>
+</html>
